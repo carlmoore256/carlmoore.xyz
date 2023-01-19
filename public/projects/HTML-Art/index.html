@@ -1,0 +1,213 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="helpers.js"></script>
+    <script src="objects.js"></script>
+</head>
+
+<body>
+    <div id="main-content">
+    </div>
+</body>
+
+
+<script>
+
+    const CORPUS = "carl moore"
+    const emptyChars = 20;
+    let FRAME = 0;
+    let updateRow = 0;
+    const TOTAL_PX = window.innerWidth * window.innerHeight;
+
+    const PIXEL_MATRIX = [];
+
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.?<>;'";
+    for (let i = 0; i < emptyChars; i++) {
+        characters += " ";
+    }
+    const numCharacters = characters.length;
+
+    const charWidth = 50;
+    const charHeight = 50;
+
+    let mouseX, mouseY = 0;
+
+
+    document.onresize = ((event) => {
+        init();
+    })
+
+    document.onmousemove = ((event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    })
+
+    function mouseMovement() {
+
+    }
+
+    function iteratePixels(callback, matrix) {
+        for (const row of matrix) {
+            for (const pixel of row) {
+                callback(pixel)
+            }
+        }
+    }
+
+    function pixelBehavior(pixel) {
+        setColor(pixel);
+        changeText(pixel);
+    }
+
+    async function setColor(pixel) {
+        if (pixel.textContent != " ") {
+            const dist = new Vector2(mouseX, mouseY).distanceTo(pixel.position) / (TOTAL_PX * 0.01) 
+            const h = Math.cos((((mouseY/window.innerWidth) + (FRAME * 0.0001) + dist) % 1.0) * Math.PI * 2)
+            // triangular
+            const l = Math.abs(((mouseX/window.innerWidth) * 2) - 1) * 0.5
+            // ((mouseY/window.innerWidth) + (FRAME * 0.0001)) % 1.0 // <= og
+            // (mouseX/window.innerHeight) * 0.5 // <= og
+            pixel.setColor(
+                hslToHex(
+                    h,
+                    Math.random(),
+                    // Math.random() * , 
+                    l
+                )
+            );
+        }
+    }
+
+    // function setColor() {
+    //     for (const p of pixels) {
+    //         if (p.textContent != " ") {
+    //             p.setColor(
+    //                 hslToHex(
+    //                     ((mouseY/window.innerWidth) + (FRAME * 0.0001)) % 1.0, 
+    //                     Math.random(), 
+    //                     mouseX/window.innerHeight
+    //                 )
+    //             );
+    //         }
+    //     }
+    // }
+
+    function checkCorpus(pixel1, pixel2) {
+        
+    }
+
+    function changeText(pixel) {
+        if (pixel.textLocked) {
+            return
+        }
+        if (Math.random() < 0.02) {
+            pixel.updateText(matrix);
+            const neighbors = pixel.getNeighbors(matrix)
+            // .filter(n => !n.textLocked);
+            // const mouseDist = new Vector2(mouseX, mouseY).distanceTo(p.position);
+            // p.element.style.transform = `scale(${mouseDist * 0.001})`
+            for (const n of neighbors) {
+                if (!n || n.textLocked) {
+                    continue;
+                }
+                if (n.element.textContent != " " && n.element.textContent === pixel.element.textContent) {
+                    pixel.connectNeighbor(n, {    
+                        freezeColor:null, 
+                        flashColor:"#fff", 
+                        animationTime:500, 
+                        animationDelay:0
+                    })
+                    n.connectNeighbor(pixel, {
+                        freezeColor:pixel.getColor(), 
+                        flashColor:"red", 
+                        animationTime:500, 
+                        animationDelay:150
+                    });
+
+                    // pixel.freezeText();
+                }
+            }
+        }
+    }
+
+    // function writeText() {
+    //     for (const row of matrix) {
+    //         for (const col of row) { 
+    //             if (Math.random() < 0.2) {
+    //                 p.updateText(matrix);
+    //                 const neighbors = p.getNeighbors(matrix);
+    //                 // const mouseDist = new Vector2(mouseX, mouseY).distanceTo(p.position);
+    //                 // p.element.style.transform = `scale(${mouseDist * 0.001})`
+    //                 for (const n of neighbors) {
+    //                     // if (n.element.textContent != "" && n.element.textContent === p.element.textContent) {
+    //                     //     n.freezeText();
+    //                     // }
+    //                 }    
+    //             }
+    //         }
+    //     }
+    // }
+
+    function init() {
+        const numCharH = Math.floor(window.innerWidth / charWidth);
+        const numCharV = Math.floor(window.innerHeight / charWidth);
+
+        // const pixels = [];
+
+        const container = document.getElementById("main-content");
+       
+        const matrix = [];
+        
+        for (let v = 0; v < numCharV; v++) {
+
+            const row = document.createElement("div");
+            row.setAttribute("class", "pixel-row");
+            row.setAttribute("id", `row-${v}`)
+
+            matrix[v] = []
+            
+            for(let h = 0; h < numCharH; h++) {
+
+                const newDiv = document.createElement("div");
+                newDiv.setAttribute("class", "pixel")
+                newDiv.style.width = charWidth;
+                newDiv.style.height = charHeight;
+                // newDiv.style.backgroundColor = hslToHex(h/numCharH, Math.random(), 1-(v/numCharV))
+                newDiv.style.backgroundColor = hslToHex(h/numCharH, Math.random(), 0.5)
+                row.appendChild(newDiv);
+
+                const pix = new Pixel(
+                    h*charHeight, 
+                    v*charWidth, 
+                    newDiv, 
+                    h, v, 
+                    charWidth, charHeight
+                )
+                pix.setCharacters(characters);
+                matrix[v][h] = pix;
+            }
+
+            container.appendChild(row);
+        }
+        return {matrix}
+    }
+
+    const {matrix} = init();
+    setInterval(() => { iteratePixels(setColor, matrix) }, 128)
+    setInterval(() => { iteratePixels(changeText, matrix) }, 128)
+    // setInterval(iteratePixels(pixelBehavior, matrix), 1000)
+    setInterval(() => {
+        FRAME++;
+        // console.log(FRAME)
+        if (FRAME > 32766) {
+            FRAME = 0;
+        }
+    }, 100)
+    // setInterval(setColor, 1028); // 16
+    // setInterval(writeText, 1028); //64
+
+</script>
+
+
+</html>

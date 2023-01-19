@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="helpers.js"></script>
+</head>
+
+<body>
+    <div id="main-content">
+    </div>
+</body>
+
+
+<script>
+
+    const corpus = "carl moore"
+    const emptyChars = 20;
+    let frame = 0;
+
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.?<>;'";
+    for (let i = 0; i < emptyChars; i++) {
+        characters += " ";
+    }
+    const numCharacters = characters.length;
+
+    const charWidth = 50;
+    const charHeight = 50;
+
+    let mouseX, mouseY = 0;
+
+
+    document.onresize = ((event) => {
+        init();
+    })
+
+    document.onmousemove = ((event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    })
+
+    function mouseMovement() {
+
+    }
+
+    function setColor() {
+
+        for (const p of pixels) {
+            if (p.textContent != " ") {
+                p.style.backgroundColor = hslToHex(((mouseY/window.innerWidth) + (frame * 0.0001)) % 1.0, Math.random(), mouseX/window.innerHeight);
+            }
+        }
+
+        frame++;
+        if (frame > 32766) {
+            frame = 0;
+        }
+    }
+
+    function writeText() {
+
+        for (const p of pixels) {
+            // const tempNode = 
+            // const mouseDist = p.compareDocumentPosition()
+            if (Math.random() < 0.2) 
+                p.textContent = characters.charAt(Math.floor(Math.random() * numCharacters))
+        }
+        // for (let i = 0; i < mouseX; i++) {
+        //     console.log(i)
+        //     textDiv.textContent = 
+        // }
+    }
+
+    function init() {
+        const numCharH = Math.floor(window.innerWidth / charWidth);
+        const numCharV = Math.floor(window.innerHeight / charWidth);
+
+        const pixels = [];
+
+        const container = document.getElementById("main-content");
+
+        console.log("AY")
+        for (let v = 0; v < numCharV; v++) {
+
+            const row = document.createElement("div");
+            row.setAttribute("class", "pixel-row");
+            row.setAttribute("id", `row-${v}`)
+
+            for(let h = 0; h < numCharH; h++) {
+
+                const newDiv = document.createElement("div");
+                newDiv.setAttribute("class", "pixel")
+                newDiv.style.width = charWidth;
+                newDiv.style.height = charHeight;
+                // newDiv.style.backgroundColor = hslToHex(h/numCharH, Math.random(), 1-(v/numCharV))
+                newDiv.style.backgroundColor = hslToHex(h/numCharH, Math.random(), 0.5)
+                row.appendChild(newDiv);
+                pixels.push(newDiv);
+            }
+
+            container.appendChild(row);
+        }
+        return pixels;
+    }
+
+    const pixels = init();
+    setInterval(setColor, 16);
+    setInterval(writeText, 64);
+
+</script>
+
+
+</html>

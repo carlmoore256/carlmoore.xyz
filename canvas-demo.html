@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <canvas id="canvas" height="500" width="500"></canvas>
+    <div>
+        <img id="source" src="public/motif.svg" width="300" height="227" />
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const image = document.getElementById("source");
+
+        const { width : imgWidth, height : imgHeight } = image;
+        var xPos = 0;
+        var yPos = 0;
+
+        var dX = 0;
+        var dY = 0;
+        var dWidth = imgWidth;
+        var dHeight = imgHeight;
+
+        window.addEventListener("mousemove", (e) => {
+            const {clientX : mouseX, clientY : mouseY} = e;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, mouseX, mouseY, imgWidth, imgHeight, dX, dY, canvas.width, canvas.height);
+        })
+
+        // image.addEventListener("load", (e) => {
+        //     setInterval(() => {
+        //         const drawWidth = imgWidth - xPos;
+        //         const drawHeight = imgHeight - yPos;
+        //         ctx.drawImage(image, xPos, yPos, drawWidth, drawHeight, dX, dY, canvWidth, canvHeight);
+        //         // xPos += 1;
+        //         // yPos += 1;
+        //     }, 300);
+        // });
+    </script>
+</body>
+
+
+
+</html>

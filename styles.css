@@ -1,0 +1,756 @@
+
+:root {
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    /* background-color: #131313; */
+    /* background-color: #9d9a59; */
+    /* background: linear-gradient(#e66465, #9198e5); */
+    /* background-repeat: no-repeat; */
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+    height: 100vh !important;
+    overflow-x: hidden;
+}
+
+
+html, body {
+  display: block;
+  margin: 0;
+  height: 100%;
+}
+
+/* --------FOOTER--------- */
+
+footer {
+  padding: 10px;
+  min-height: 60px;
+}
+
+footer p {
+  bottom: 0px;
+  color: white;
+  margin: 10px;
+}
+
+/* --------NAVBAR--------- */
+
+nav {
+  z-index: 999;
+  display: flex;
+  flex-direction: row;
+  /* background-color: rgba(43, 36, 36, 0.613); */
+  /* background-color: rgba(197, 6, 6, 0.613); */
+  margin: 0;
+}
+
+.nav-links {
+  max-width: 85%;
+  /* background-color: #1ed36f; */
+  /* height: 100%; */
+  /* Make room for the nav icon */
+  width: -webkit-calc(100% - 80px);
+  width:    -moz-calc(100% - 80px);
+  width:         calc(100% - 80px);
+}
+
+nav ul {
+  padding: 10px;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav li {
+  margin: 15px;
+}
+
+.nav-item {
+  display: block;
+  width: 100%;
+  border-radius:20px;
+  padding: 12px;
+  background-color: rgba(240, 248, 255, 0.175);
+  transition-duration: 200ms;
+  color:rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.nav-item:hover {
+  background-color: #ffffffb5;
+  outline: 3px solid inset rgb(0, 0, 0);
+}
+
+.nav-item a {
+  color:rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+#nav-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 4;
+}
+
+#nav-logo {
+  max-width: 100%;
+  max-height: 80px;
+  opacity: 0.75;
+  transition-duration: 300ms;
+}
+
+#nav-logo:hover {
+  opacity: 1;
+}
+
+/* For mobile screens */
+@media screen and (max-width: 350px) {
+  nav {
+    background-color: #9d2e2e;
+    max-height: 100px;
+    overflow: scroll;
+  }
+
+  nav ul {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  nav li {
+    margin: 2px;
+    padding: 10px;
+  }
+
+  .nav-links {
+    max-width: 85%;
+    width: -webkit-calc(100% - 50px);
+    width:    -moz-calc(100% - 50px);
+    width:         calc(100% - 50px);
+  }
+
+  .nav-item {
+    display: flex;
+    border-radius:10px;
+    padding: 10px;
+    background-color: rgba(240, 248, 255, 0.175);
+    color:rgb(0, 0, 0);
+    font-size: 1.0rem;
+    /* width: 100%; */
+  }
+
+  #nav-logo {
+    max-height: 60px;
+    position: absolute;
+    margin: 0;
+  }
+
+  #nav-logo-container {
+    display: block;
+    margin-left: -10px;
+    /* align-items: left; */
+    /* justify-content: left; */
+    /* flex-shrink: 4; */
+  }
+}
+
+/* ----------------------- */
+
+.content {
+  padding: 10px;
+}
+
+.main-banner {
+  position: absolute; 
+  background-color: #6640a2;
+  padding: 20px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.734);
+  /* text-decoration: underline; */
+  transition-duration: 500ms;
+  bottom: 15%; 
+  right: 15%; 
+  color: white;
+  z-index: 999;
+}
+
+.main-banner a {
+  color: white;
+  text-decoration: none;
+}
+
+.main-banner:hover {
+  background-color: #1ed36f71;
+  cursor: pointer;
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px rgba(0, 0, 0, 0.734);
+  text-decoration: underline;
+}
+
+
+/* For mobile screens */
+@media screen and (max-width: 450px) {
+  .main-banner {
+    position: fixed; 
+    box-shadow: -5px -5px 5px rgba(0, 0, 0, 0.089);
+    bottom: 0%; 
+    left: 0%; 
+    width: 100%;
+    color: white;
+  }
+}
+
+.text-matrix {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.svg-container {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  margin: auto;
+  width: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.info-overlay {
+  z-index: 800;
+  background-color: rgba(58, 58, 58, 0.826);
+  padding: 8px;
+  border-radius: 4px;
+  width: auto;
+  height: auto;
+}
+
+/* ----------------------- */
+
+.no-select {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+/* ----------------------- */
+
+.control-panel {
+  position: fixed;
+  display: block;
+  flex-direction: column;
+  margin: 8px;
+  padding: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(218, 214, 242, 0.095);
+  border-radius: 7px;
+  z-index: 999;
+  transition-duration: 500ms;
+  /* transition-property: background-color; */
+  /* overflow: scroll; */
+}
+
+.grab-bar {
+  width: calc(100% + 16px);
+  min-height: 14px; 
+  background-color: #ffffff2b;
+  transition-duration: 300ms;
+  border-radius: 5px 5px 0 0;
+  margin-top: -8px;
+  margin: -8px 0 0 -8px;
+}
+
+.grab-bar:hover {
+  background-color: #ffffffd5;
+}
+
+.enabled {
+  background-color: rgba(233, 233, 233, 0.136);
+}
+
+
+.panel {
+  border-radius: 4px;
+  /* background-color: rgba(0, 0, 0, 0.196); */
+  margin: 3px 0px 3px 0px;
+}
+
+.control-panel .panel {
+  display: flex;
+  flex-direction: column;
+  padding: 3px 10px 3px 10px;
+  transition-duration: 200ms;
+}
+
+.panel h4 {
+  margin: 1px;
+}
+
+.panel button {
+  padding: 4px;
+  min-width:26px;
+  min-height:26px;
+  margin: 2px;
+  /* background-color: #1ed36f; */
+}
+
+@media screen and (max-width: 700px) {
+  .control-panel {
+    display: none;
+  }
+}
+
+/* ----------------------- */
+
+.decimate-canvas {
+  image-rendering: pixelated;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.page-centered {
+  position: absolute;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+}
+
+.item-centered {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-fixed {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* height: 100%; */
+}
+
+.ascii-pixel-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.ascii-pixel {
+  flex: 1 0 auto;
+  height: auto;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  font-size: 8px;
+  /* transition-duration: 300ms; */
+  aspect-ratio: 1/1;
+}
+/* 
+.ascii-pixel:before {
+  content: '';
+  display: block;
+  padding-top: 50%;
+} */
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.flex-list {
+  gap:10px;
+}
+
+.project-item {
+  /* border-radius: 8px; */
+  background-color: rgb(20, 20, 20);
+  box-shadow: 4px 4px 0px rgba(245, 245, 245, 0.627);
+  padding: 8px;
+  margin: 10px;
+  transition-duration: 300ms;
+}
+
+.project-item:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px rgba(245, 245, 245, 0.627);
+  cursor: pointer;
+}
+
+
+.dat-gui-panel {
+  width: 100%;
+  height: 100vh;
+  margin: 100px;
+  display: flex;
+}
+
+
+/* ============ DAT GUI ============= */
+
+.react-dat-gui {
+  position: fixed;
+  right: 16px;
+  top: 0;
+  width: 280px;
+  font-size: 12px;
+  font-family: Lucida Grande, sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent
+}
+
+.react-dat-gui *,
+.react-dat-gui :after,
+.react-dat-gui :before {
+  box-sizing: inherit
+}
+
+.react-dat-gui .dg {
+  margin: 0;
+  padding: 0;
+  color: #eee;
+  overflow: hidden
+}
+
+.react-dat-gui .dg ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  clear: both
+}
+
+.react-dat-gui .dg.main::-webkit-scrollbar {
+  width: 5px;
+  background: #1a1a1a
+}
+
+.react-dat-gui .dg.main::-webkit-scrollbar-corner {
+  height: 0;
+  display: none
+}
+
+.react-dat-gui .dg.main::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #676767
+}
+
+.react-dat-gui .cr {
+  display: block;
+  background-color: #1a1a1a;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.react-dat-gui .cr:not(:last-child) {
+  border-bottom: 1px solid #272727
+}
+
+.react-dat-gui .cr label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1px 2px 1px 8px
+}
+
+.react-dat-gui .cr .label-text {
+  width: 40%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.react-dat-gui .cr input[type=number],
+.react-dat-gui .cr input[type=text] {
+  background: #303030;
+  border: 3px solid #1a1a1a;
+  border-radius: 0;
+  margin: 0;
+  outline: none;
+  font-size: inherit
+}
+
+.react-dat-gui .cr input[type=number]:hover,
+.react-dat-gui .cr input[type=text]:hover {
+  background: #3c3c3c
+}
+
+.react-dat-gui .cr input[type=number]:focus,
+.react-dat-gui .cr input[type=text]:focus {
+  background: #494949;
+  color: #fff
+}
+
+.react-dat-gui .cr input[type=number]::-ms-clear,
+.react-dat-gui .cr input[type=text]::-ms-clear {
+  display: none
+}
+
+.react-dat-gui .cr.boolean {
+  position: relative;
+  border-left: 5px solid #806787
+}
+
+.react-dat-gui .cr.boolean label {
+  cursor: pointer
+}
+
+.react-dat-gui .cr.boolean .label-text {
+  display: block;
+  padding: 5px 0
+}
+
+.react-dat-gui .cr.boolean .checkbox-container {
+  width: 100%
+}
+
+.react-dat-gui .cr.boolean input[type=checkbox] {
+  margin: 0;
+  vertical-align: middle
+}
+
+.react-dat-gui .cr.button {
+  border-left: 5px solid #e61d5f
+}
+
+.react-dat-gui .cr.button:hover {
+  background: #111
+}
+
+.react-dat-gui .cr.button .label-text {
+  display: block;
+  width: 100%;
+  padding: 6px 2px 6px 8px;
+  cursor: pointer
+}
+
+.react-dat-gui li.folder {
+  display: block;
+  padding: 0
+}
+
+.react-dat-gui li.folder .title {
+  font-weight: 700;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+  cursor: pointer;
+  padding: 5px 5px 5px 16px;
+  background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 48% no-repeat
+}
+
+.react-dat-gui li.folder ul {
+  margin-left: 4px;
+  width: calc(100% - 4px)
+}
+
+.react-dat-gui li.folder.closed .title {
+  background: #000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==) 6px 48% no-repeat
+}
+
+.react-dat-gui li.folder.closed ul {
+  display: none
+}
+
+.react-dat-gui .cr.number {
+  border-left: 5px solid #2fa1d6
+}
+
+.react-dat-gui .cr.number input[type=number],
+.react-dat-gui .cr.number input[type=text] {
+  color: #2fa1d6;
+  height: 25px
+}
+
+.react-dat-gui .cr.number .slider {
+  display: block;
+  position: relative;
+  border: 3px solid #1a1a1a;
+  border-right-width: 1px;
+  background-color: #303030;
+  background-image: linear-gradient(90deg, #2fa1d6, #2fa1d6);
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  cursor: ew-resize;
+  height: 25px
+}
+
+.react-dat-gui .cr.string {
+  border-left: 5px solid #1ed36f
+}
+
+.react-dat-gui .cr.string input[type=text] {
+  color: #1ed36f;
+  padding: 2px 5px;
+  width: 100%
+}
+
+.react-dat-gui .cr.select {
+  border-left: 5px solid #f4d450
+}
+
+.react-dat-gui .cr.select label {
+  padding: 6px 2px 6px 8px
+}
+
+.react-dat-gui .cr.color {
+  border-left: 5px solid #1a1a1a
+}
+
+.react-dat-gui .cr.color .swatch {
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: rgba(0, 0, 0, .7) 0 1px 1px;
+  padding: 2px 5px;
+  border: 3px solid #1a1a1a;
+  cursor: pointer
+}
+
+.react-dat-gui .cr.color .popover {
+  position: absolute;
+  z-index: 2;
+  right: 5px
+}
+
+.react-dat-gui .cr.color .cover {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0
+}
+
+.react-dat-gui .cr.color .picker {
+  background: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .3), 0 4px 8px rgba(0, 0, 0, .3);
+  box-sizing: initial;
+  width: auto;
+  font-family: Menlo, sans-serif;
+  margin-top: -3px
+}
+
+.react-dat-gui .cr.color .picker .body {
+  padding: 0
+}
+
+.react-dat-gui .cr.color .picker .body .controls {
+  display: flex
+}
+
+.react-dat-gui .cr.color .picker .body .controls .toggles {
+  flex: 1
+}
+
+.react-dat-gui .cr.color .picker .body .controls .toggles .hue-wrap {
+  height: 10px;
+  position: relative
+}
+
+.react-dat-gui .cr.color .picker .saturation-wrap {
+  width: 100%;
+  padding-bottom: 55%;
+  position: relative;
+  overflow: hidden
+}
+
+.react-dat-gui .cr.color .fields-wrap {
+  display: flex
+}
+
+.react-dat-gui .cr.color .fields-wrap .fields {
+  flex: 1;
+  display: flex;
+  margin-left: -6px
+}
+
+.react-dat-gui .cr.color .fields-wrap .fields .field {
+  padding-left: 6px;
+  width: 100%
+}
+
+.react-dat-gui .cr.color .fields-wrap .fields .field input {
+  font-size: 11px;
+  color: #333;
+  border-radius: 2px;
+  border: none;
+  box-shadow: inset 0 0 0 1px #dadada;
+  height: 21px;
+  text-align: center
+}
+
+.react-dat-gui .cr.color .fields-wrap .fields .field input:focus {
+  outline: none
+}
+
+.react-dat-gui .cr.color .fields-wrap .fields .field label {
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 11px;
+  color: #969696;
+  text-align: center;
+  display: block;
+  margin-top: 12px
+}
+
+.react-dat-gui .cr.color .pointer {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  transform: translate(-6px, -1px);
+  background-color: #f8f8f8;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .37);
+  position: absolute;
+  z-index: 3
+}
+
+.react-dat-gui .cr.color .pointer-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px #fff;
+  transform: translate(-6px, -6px)
+}
+
+.react-dat-gui .cr.presets {
+  border-left: 5px solid #dad5cb
+}
+
+.react-dat-gui .cr.presets label {
+  padding: 6px 2px 6px 8px
+}
+
+.react-dat-gui .cr.presets label select {
+  width: 100%
+}

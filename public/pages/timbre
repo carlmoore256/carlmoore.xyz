@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			background-image: url("../images/timbre-paint.png");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			background-color: #E6E6E6;
+			transition-duration: 300ms;
+		}
+	</style>
+	<title>Carl Moore - Portfolio</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel ="stylesheet" type="text/css" href="timbre.css">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+	<!-- P5js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+	<!-- Quicksettings gui -->
+	<!-- <script src="https://cdn.rawgit.com/bit101/quicksettings/master/quicksettings.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/quicksettings@latest/quicksettings.min.js"></script>
+
+	<script src="../js/timbreCanvas.js" type="text/javascript" defer></script>
+	<script src="../js/audioFeatures.js" defer></script>
+	<script src="https://unpkg.com/meyda/dist/web/meyda.min.js"></script>
+
+	<script>
+		function addPlayerListeners() {
+			const audioPlayer = document.getElementById("audio-player"); 
+			audioPlayer.addEventListener('mouseenter', e => { 
+				e.target.style.opacity = 1
+			} );
+			audioPlayer.addEventListener('mouseleave', e => {
+				setTimeout(() => {
+					e.target.style.opacity = 0.2;
+				}, 1000)
+			} );
+			audioPlayer.style.opacity = 0.2;
+		}
+
+		function saveCanvasImage() {
+			const imageData = document.getElementById("timbre-canvas").toDataURL();
+			const image = new Image();
+			image.src = imageData;
+			const audio = document.getElementById("audio").pause();
+			const w = window.open("");
+			w.document.write(image.outerHTML);
+		}
+
+
+	</script>
+
+</head>
+<nav>
+
+</nav>
+<body>
+
+	<div class="title" id="page-title">
+		<h1>timbre.paint</h1>
+		<br>
+		<p class="subtitle">click anywhere to begin</p>
+	</div>
+		<div id="audio-player">
+			<audio controls loop crossorigin="anonymous" id="audio"
+			src="" oncanplaythrough="addPlayerListeners()">
+		</audio>
+	</div>
+	<div class="btn-container">
+		<button id="btn-save-img" class="btn" onclick="saveCanvasImage()" style="background: url(../icons/camera.svg); background-repeat: no-repeat; padding: 0 30px; background-position: center; min-height: 40px;"></button>
+	</div>
+	<div style="z-index: 99">
+		<a href="/">
+			<img src="../images/xyz3.svg" id="nav-logo"/>
+		</a>
+	</div>
+	<div class="stats-container">
+		<div id="render-stats" style="display: none;">
+			<div class="stats" id="s-fps">
+				<label>FPS:</label>
+				<p>0</p>
+			</div>
+			<div class="stats" id="s-num-nodes">
+				<label># Nodes:</label>
+				<p>0</p>
+			</div>
+			<div class="stats" id="s-num-lines">
+				<label># Lines:</label>
+				<p>0</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
